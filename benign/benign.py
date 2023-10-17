@@ -18,4 +18,4 @@ time.sleep(1)
 driver.find_element(by=By.ID, value="wp-submit").click()
 time.sleep(1)
 
-driver.quit()
+driver.quit()   

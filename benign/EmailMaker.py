@@ -22,5 +22,5 @@ def EmailMaker():
             print(item.rstrip("\n"))
             email = "{}".format(NamesPickRandom().lower()+"@"+item.strip())
             emails.append(email)
-
+        print("Success! email made")
     return emails
