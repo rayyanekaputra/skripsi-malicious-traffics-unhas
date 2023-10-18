@@ -19,8 +19,11 @@ def EmailMaker():
         files = file.readlines()
         files_shuffled = random.shuffle(files)
         for item in files:
-            print(item.rstrip("\n"))
+            # print(item.rstrip("\n"))
             email = "{}".format(NamesPickRandom().lower()+"@"+item.strip())
             emails.append(email)
         print("Success! email made")
     return emails
+
+def EmailPickRandom():
+    return (random.choice(EmailMaker()))
