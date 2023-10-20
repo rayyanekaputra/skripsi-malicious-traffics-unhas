@@ -1,0 +1,5 @@
+penerapan proxy untuk probing serta untuk bisa keluar dari DNS UNHAS:
+https://www.selenium.dev/documentation/webdriver/drivers/options/#proxy
+
+proxy gratis: 
+https://www.sslproxies.org/
