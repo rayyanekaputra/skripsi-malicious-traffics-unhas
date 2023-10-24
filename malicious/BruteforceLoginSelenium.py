@@ -112,15 +112,17 @@ proxy_use = '202.159.35.161:443'
 # "proxyType": "MANUAL",
 
 # }
+
 options = webdriver.ChromeOptions() 
-options.add_argument(f'--proxy-server={proxy_use}')
+# options.add_argument(f'--proxy-server={proxy_use}')
 options.add_argument("--ignore-certificate-errors")
 options.add_argument("--start-maximized")
 driver = webdriver.Chrome(options=options)
 
 # driver.set_window_position(2000, 0)
-driver.get("https://103.185.193.35/wp-login.php")
+driver.get("https://10.163.10.244/wp-login.php")
 driver.implicitly_wait(2)
+
 
 driver.find_element(by=By.ID, value="user_login").send_keys(NamesPickRandom())
 time.sleep(1)

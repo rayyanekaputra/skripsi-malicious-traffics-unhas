@@ -21,10 +21,16 @@ from EmailMaker import NamesPickRandom
 from PasswordMaker import PasswordPickRandom
 
 """
-For BruteForce testing purpose with XML-RPC
+
+Benign:
+Creating and Publishing a New Post
+
 """
 
-client = Client(url = "https://10.163.10.244/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa")
+client = Client(
+    url = "https://10.163.10.244/xmlrpc.php",
+    username = "resephariankamu",
+    password="LiG5hqDiMNCacSa")
 
 post = WordPressPost()
 post.title = 'Test Rayyan'

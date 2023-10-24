@@ -8,5 +8,9 @@ https://free-proxy-list.net/
 proxy checker:
 https://proxy6.net/en/checker
 
-selenium field test: https://whatismyipaddress.com/
+selenium field test IP sudah terganti dgn PROXY:
+https://whatismyipaddress.com/
+
+bypass cloudflares anti-bot:
+https://www.zenrows.com/blog/selenium-cloudflare-bypass#cloudfalre-bypass-using-undetected-chromedriver
 
