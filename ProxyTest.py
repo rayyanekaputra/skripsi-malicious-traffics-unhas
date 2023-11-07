@@ -14,10 +14,12 @@ def ProxyTester():
         PROXY = ProxyCheckerToWeb()
         options = uc.ChromeOptions() 
         options.add_argument(f'--proxy-server={PROXY}')
+        options.add_argument("--ignore-certificate-errors")
         print(f'--proxy-server={PROXY}')
         driver = webdriver.Chrome(options=options)
+        driver.implicitly_wait(10)
         driver.get("https://whatismyipaddress.com/")
-        driver.implicitly_wait(2)
+       
         
         try:
             ISP = driver.find_element(by = By.XPATH, value= '//*[@id="fl-post-111"]/div/div/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[1]/div[3]/div/p[1]/span[2]') 

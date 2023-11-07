@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-import random
+from selenium.common.exceptions import NoSuchElementException, NoSuchWindowException
 import time
 
 #IMPORT FOLDER OF THE MODULES
@@ -39,7 +38,6 @@ while True:
     except NoSuchElementException:
     # Handle the "Element not found" exception
         print("Website Failed to Load!")
-        
     i = i + 1
 
 driver.quit()

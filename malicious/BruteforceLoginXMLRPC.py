@@ -14,20 +14,53 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 #IMPORT FOLDER OF THE MODULES
 import sys
-sys.path.insert(0,'/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/benign/register')
+sys.path.extend(['/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/benign/register',
+                 '/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/'])
+
 
 #MODULES
 from EmailMaker import NamesPickRandom
 from PasswordMaker import PasswordPickRandom
+from ProxyTest import ProxyTester
 
+# proxy = ProxyTester()
 """
 For BruteForce testing purpose with XML-RPC
 """
 
-client = Client(url = "https://10.163.10.244/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa")
+
+import http.client
+import xmlrpc.client
+
+class ProxiedTransport(xmlrpc.client.Transport):
+
+    def set_proxy(self, host, port=None, headers=None):
+        self.proxy = host, port
+        self.proxy_headers = headers 
+
+    def make_connection(self, host):
+        connection = http.client.HTTPConnection(*self.proxy)
+        connection.set_tunnel(host, headers=self.proxy_headers)
+        self._connection = host, connection
+        return connection
+
+# server = xmlrpc.client.ServerProxy('http://betty.userland.com', transport=transport)
+
+while True:
+    proxy_complete = ProxyTester().split(":")
+    proxy_ip, proxy_port = proxy_complete
+    proxy_port = int(proxy_port)
+    print(proxy_ip, proxy_port)
+
+    transport = ProxiedTransport()
+    transport.set_proxy(proxy_ip, proxy_port)
+    try:
+        client = Client(url = "https://103.185.193.35/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa", transport=transport)
+        break
+    except:
+        print('ERROR')
 
 post = WordPressPost()
-post.title = 'My post'
 post.content = 'This is a wonderful blog post about XML-RPC.'
 post.id = client.call(posts.NewPost(post))
 post.post_status = "publish"
