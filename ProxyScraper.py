@@ -8,6 +8,8 @@ import random
 def ProxyScrape():
 
     URL = "https://www.sslproxies.org/"
+    # URL = "https://free-proxy-list.net/"
+    
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, "html.parser")
@@ -21,7 +23,7 @@ def ProxyScrape():
     for row in job_elements.tbody.find_all('tr'):
         columns = row.find_all('td') #return: dalam bentuk ResultSet bukan list
         if len(columns) >= 0:
-            if columns[1] != '80':
+            if columns[1] != 80:
                 proxy_ip.append(columns[0].text.strip())
                 proxy_port.append(columns[1].text.strip())
                 proxy_complete.append(columns[0].text.strip() + ":" + columns[1].text.strip()) # Index 2 represents the third column (0-based index)

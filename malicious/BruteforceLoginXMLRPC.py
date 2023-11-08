@@ -34,18 +34,26 @@ import xmlrpc.client
 
 class ProxiedTransport(xmlrpc.client.Transport):
 
-    def set_proxy(self, host, port=None, headers=None):
+    def set_proxy(self, host, port=None, headers=None, secure=False):
         self.proxy = host, port
-        self.proxy_headers = headers 
+        self.proxy_headers = headers
+        self.secure = secure
 
     def make_connection(self, host):
-        connection = http.client.HTTPConnection(*self.proxy)
+        if self.secure:
+            connection = http.client.HTTPSConnection(*self.proxy)
+            # Jika Self-Signed SSL dan skip warning
+            context = ssl.create_default_context()
+            context.check_hostname = False
+            context.verify_mode = ssl.CERT_NONE
+
+        else:
+            connection = http.client.HTTPConnection(*self.proxy)
         connection.set_tunnel(host, headers=self.proxy_headers)
         self._connection = host, connection
         return connection
 
 # server = xmlrpc.client.ServerProxy('http://betty.userland.com', transport=transport)
-
 while True:
     proxy_complete = ProxyTester().split(":")
     proxy_ip, proxy_port = proxy_complete
@@ -53,22 +61,23 @@ while True:
     print(proxy_ip, proxy_port)
 
     transport = ProxiedTransport()
-    transport.set_proxy(proxy_ip, proxy_port)
+    transport.set_proxy(proxy_ip, proxy_port, secure=True)
+    client = Client(url = "https://103.185.193.35/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa", transport=transport)
+
     try:
-        client = Client(url = "https://103.185.193.35/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa", transport=transport)
+        post = WordPressPost()
+        post.content = 'This is a wonderful blog post about XML-RPC.'
+        post.id = client.call(posts.NewPost(post))
+        post.post_status = "publish"
+        print("POSTINGAN BERHASIL DIPOST")
         break
     except:
-        print('ERROR')
+        print("NDA BISA WORDPRESSNYA")
 
-post = WordPressPost()
-post.content = 'This is a wonderful blog post about XML-RPC.'
-post.id = client.call(posts.NewPost(post))
-post.post_status = "publish"
-
-try:
-    client.call(posts.EditPost(post.id, post))
-    success = 1
-except InvalidCredentialsError:
-    success = 0
-    print("incorrect username or password")
+# try:
+#     client.call(posts.EditPost(post.id, post))
+#     success = 1
+# except InvalidCredentialsError:
+#     success = 0
+#     print("incorrect username or password")
 
