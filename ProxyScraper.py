@@ -23,8 +23,8 @@ def ProxyScrape():
     for row in job_elements.tbody.find_all('tr'):
         columns = row.find_all('td') #return: dalam bentuk ResultSet bukan list
         if len(columns) >= 0:
-            if columns[1].text.strip() != '80': #.text karena mau ambil isi text-nya, bukan get_text() --> .text itu 'str'
-                print(columns[1])
+            if columns[1].text.strip() not in ['80', '8080']: #.text karena mau ambil isi text-nya, bukan get_text() --> .text itu 'str'
+                # print(columns[1])
                 proxy_ip.append(columns[0].text.strip())
                 proxy_port.append(columns[1].text.strip())
                 proxy_complete.append(columns[0].text.strip() + ":" + columns[1].text.strip()) # Index 2 represents the third column (0-based index)
@@ -61,10 +61,64 @@ def ProxyCheckerToWeb():
             return (proxy_rand)
 
         except requests.exceptions.RequestException as e:
-            if "refused" in str(e):
-                print("Proxy Gagal [REFUSED]")
-            elif isinstance(e, requests.exceptions.Timeout):
-                print("Request Website Gagal [REQUEST TIMED OUT]")
-            else:
-                print(f"Proxy dan Request Gagal: {e}")
+            print("Google.com --> ")
+            print("[REQUEST REFUSED]")
 
+        except requests.exceptions.Timeout as e:
+            print("Google.com --> ")
+            print("[REQUEST TIMED-OUT]")
+
+        except requests.exceptions.HTTPError as e:
+            print("Google.com --> ")
+            print("[HTTP ERROR]")
+
+        except requests.exceptions.ConnectionError as e:
+            print("Google.com --> ")
+            print("[CONNECTION ERROR]")
+
+        except requests.exceptions.TooManyRedirects as e:
+            print("Google.com --> ")
+            print("[TOO MANY REDIRECTS]")
+
+        except requests.exceptions.MissingSchema as e:
+            print("Google.com --> ")
+            print("[MISSING SCHEMA]")
+
+        except requests.exceptions.InvalidSchema as e:
+            print("Google.com --> ")
+            print("[INVALID SCHEMA]")
+
+        except requests.exceptions.InvalidURL as e:
+            print("Google.com --> ")
+            print("[INVALID URL]")
+
+        except requests.exceptions.InvalidHeader as e:
+            print("Google.com --> ")
+            print("[INVALID HEADER]")
+
+        except requests.exceptions.InvalidProxyURL as e:
+            print("Google.com --> ")
+            print("[INVALID PROXY URL]")
+
+        except requests.exceptions.ChunkedEncodingError as e:
+            print("Google.com --> ")
+            print("[CHUNKED ENCODING ERROR]")
+
+        except requests.exceptions.ContentDecodingError as e:
+            print("Google.com --> ")
+            print("[CONTENT DECODING ERROR]")
+
+        except requests.exceptions.StreamConsumedError as e:
+            print("Google.com --> ")
+            print("[STREAM CONSUMED ERROR]")
+
+        except requests.exceptions.RetryError as e:
+            print("Google.com --> ")
+            print("[RETRY ERROR]")
+
+        except requests.exceptions.UnrewindableBodyError as e:
+            print("Google.com --> ")
+            print("[UNREWINDABLE BODY ERROR]")
+
+        except Exception as e:
+            print(f"Google.com --> An unexpected error occurred: {e}")
