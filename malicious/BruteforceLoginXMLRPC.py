@@ -23,11 +23,9 @@ from EmailMaker import NamesPickRandom
 from PasswordMaker import PasswordPickRandom
 from ProxyTest import ProxyTester
 
-# proxy = ProxyTester()
 """
 For BruteForce testing purpose with XML-RPC
 """
-
 
 import http.client
 import xmlrpc.client

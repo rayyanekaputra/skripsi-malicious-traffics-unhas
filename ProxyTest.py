@@ -17,7 +17,7 @@ def ProxyTester():
         options.add_argument("--ignore-certificate-errors")
         print(f'--proxy-server={PROXY}')
         driver = webdriver.Chrome(options=options)
-        driver.implicitly_wait(10)
+        driver.implicitly_wait(1) #Menunggu DOM load
         driver.get("https://whatismyipaddress.com/")
        
         
@@ -34,4 +34,3 @@ def ProxyTester():
         else:
             print("\nISP Tetap[x]\nProxy Gagal!")
             driver.quit()
-
