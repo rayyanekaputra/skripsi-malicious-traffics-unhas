@@ -13,12 +13,13 @@ def ProxyTester():
     while True:
         PROXY = ProxyCheckerToWeb()
         options = uc.ChromeOptions() 
+        options.page_load_strategy = 'eager' #spy pas load langsung na deteksi
         options.add_argument(f'--proxy-server={PROXY}')
         options.add_argument("--ignore-certificate-errors")
         # options.add_argument("--headless")
         print(f'--proxy-server={PROXY}')
         driver = webdriver.Chrome(options=options)
-        driver.implicitly_wait(5) #Menunggu DOM load
+        driver.implicitly_wait(2.5) #Menunggu DOM load
         driver.get("https://whatismyipaddress.com/")
        
         
@@ -32,23 +33,26 @@ def ProxyTester():
             else:
                 print("\nISP Tetap[x]\nProxy Gagal!")
             driver.quit()
+
         except WebDriverException as e:
-            if "ERR_CONNECTION_RESET" in str(e): # 'in' krn di dalamnya bukan satu string
+            if "ERR_CONNECTION_RESET" in str(e):
                 print("Connection Reset, mencari proxy baru\n")
-                continue
-            elif "ERR_CONNECTION_TIMED_OUT" in str(e): 
+            elif "ERR_CONNECTION_TIMED_OUT" in str(e):
                 print("Connection Timed Out, mencari proxy baru\n")
-                continue
-            elif "ERR_CONNECTION_CLOSED" in str(e): 
+            elif "ERR_TIMED_OUT" in str(e):
+                print("Client Timed Out, mencari proxy baru\n")
+            elif "ERR_CONNECTION_CLOSED" in str(e):
                 print("Connection Closed, mencari proxy baru\n")
-                continue
-            elif "ERR_PROXY_CONNECTION_FAILED" in str(e): 
+            elif "ERR_PROXY_CONNECTION_FAILED" in str(e):
                 print("Proxy Connection Failed, mencari proxy baru\n")
-                continue
-            else:
-                print("ERROR UNIK")
-                print("\n" + str(e))
-                continue
+            driver.quit()  # Quit the current WebDriver instance
+            continue  # Continue to the next iteration of the loop
+
+        except NoSuchElementException as e:
+            print("Error tidak na dapatki elementnya")
+            print("\n" + str(e))
+            driver.quit()
+            continue
         
         
 ProxyTester()
