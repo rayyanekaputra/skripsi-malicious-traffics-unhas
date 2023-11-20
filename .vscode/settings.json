@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./benign/register"
+    ],
+    "python.analysis.autoImportCompletions": false
+}

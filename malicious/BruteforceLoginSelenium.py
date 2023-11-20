@@ -36,7 +36,7 @@ while True:
         driver.find_element(by=By.ID, value="wp-submit").click()
         time.sleep(1)
     except NoSuchElementException:
-    # Handle the "Element not found" exception
+    # Handle the "Element not found" exceptionddd
         print("Website Failed to Load!")
     i = i + 1
 
