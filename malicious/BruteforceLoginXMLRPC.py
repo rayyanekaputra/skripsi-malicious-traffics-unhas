@@ -66,7 +66,8 @@ while True:
 
     try:
         post = WordPressPost()
-        post.content = 'This is a wonderful blog post about XML-RPC.'
+        post.title = 'test nov 10'
+        post.content = 'ADAKAH RAYYAN DI HAATIMU'
         post.id = client.call(posts.NewPost(post))
         post.post_status = "publish"
         print("POSTINGAN BERHASIL DIPOST")
