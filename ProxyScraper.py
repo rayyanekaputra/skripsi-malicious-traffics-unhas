@@ -19,21 +19,17 @@ def ProxyScrape():
     proxy_port = []
     proxy_complete = []
 
-    # Collecting Ddata
+    # Ambil data dalam table
     for row in job_elements.tbody.find_all('tr'):
         columns = row.find_all('td') #return: dalam bentuk ResultSet bukan list
         if len(columns) >= 0:
             if columns[1].text.strip() not in ['80', '8080']: #.text karena mau ambil isi text-nya, bukan get_text() --> .text itu 'str'
-                # print(columns[1])
                 proxy_ip.append(columns[0].text.strip())
                 proxy_port.append(columns[1].text.strip())
                 proxy_complete.append(columns[0].text.strip() + ":" + columns[1].text.strip()) # Index 2 represents the third column (0-based index)
-
-    # print(type(columns[1].text)) #keluarannya 'str'
-    # print(type(proxy_ip), type(proxy_port), type(proxy_complete))
     return (proxy_ip, proxy_port, proxy_complete)
 
-def ProxyCheckerToWeb():
+def CheckProxyGoogle():
     ProxyScrape()
     proxy_ip, proxy_port, proxy_complete = ProxyScrape()
     while True:
@@ -51,11 +47,9 @@ def ProxyCheckerToWeb():
         # Check the response
         try:
             response = requests.get(url, proxies=proxy,timeout=3, verify = False) #tambahkan verifiy = False kalau Self-Signed
-            print("Proxy dan Request Website Berhasil!\n")
-
             #check https://requests.readthedocs.io/en/latest/user/quickstart/#response-content
             if response.status_code == requests.codes.ok:
-                print (f"== PROXY TERSEDIA: {proxy['http']} ==")
+                print (f"\nLive and not blocked by Google: {proxy['http']}")
             else:
                 response.raise_for_status()  # Raise an exception if the response status is not 200
             return (proxy, proxy_rand)
