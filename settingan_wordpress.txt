@@ -1,0 +1,6 @@
+password database: rayyan
+
+password wordpress:
+	user: admin
+	pass: admin
+	

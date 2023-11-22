@@ -1,0 +1,6 @@
+beautifulsoup4==4.12.2
+ping3==4.0.4
+python_wordpress_xmlrpc==2.3
+Requests==2.31.0
+selenium==4.15.2
+undetected_chromedriver==3.5.4
