@@ -58,7 +58,7 @@ def ProxyCheckerToWeb():
                 print (f"== PROXY TERSEDIA: {proxy['http']} ==")
             else:
                 response.raise_for_status()  # Raise an exception if the response status is not 200
-            return (proxy_rand)
+            return (proxy, proxy_rand)
 
         except requests.exceptions.RequestException as e:
             print("Google.com --> ")
