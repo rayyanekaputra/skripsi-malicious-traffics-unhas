@@ -1,3 +1,4 @@
+import random
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, NoSuchWindowException
@@ -39,6 +40,12 @@ while True:
             time.sleep(1)
             driver.find_element(by=By.ID, value="wp-submit").click()
             time.sleep(1)
+
+             # Introduce a random timeout between 2 and 5 seconds
+            timeout = random.uniform(2, 5)
+            print(f"Waiting for {timeout:.2f} seconds before the next attempt...")
+            time.sleep(timeout)
+
             i = i+1
         
     except NoSuchElementException:
