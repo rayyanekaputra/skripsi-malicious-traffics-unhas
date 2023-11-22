@@ -14,12 +14,12 @@ sys.path.extend(['/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/be
 #MODULES
 from EmailMaker import NamesPickRandom
 from PasswordMaker import PasswordPickRandom
-from ProxyTest import ProxyTester
+from ProxyTest import CheckIfProxySameAsIP
 
 i = 0
 while True:
     try:
-        proxy_raw, proxy_complete = ProxyTester()
+        proxy_raw, proxy_complete = CheckIfProxySameAsIP()
         options = webdriver.ChromeOptions() 
         print(f"Starting chrome with {proxy_complete}")
         options.add_argument(f'--proxy-server={proxy_complete}')
