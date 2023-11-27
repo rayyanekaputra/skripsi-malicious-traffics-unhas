@@ -26,15 +26,16 @@ Benign:
 Creating and Publishing a New Post
 
 """
+def NewPost():
+        
+    client = Client(
+        url = "https://10.163.10.244/xmlrpc.php",
+        username = "resephariankamu",
+        password="LiG5hqDiMNCacSa")
 
-client = Client(
-    url = "https://10.163.10.244/xmlrpc.php",
-    username = "resephariankamu",
-    password="LiG5hqDiMNCacSa")
-
-post = WordPressPost()
-post.title = 'Test Rayyan'
-post.content = 'This is a wonderful blog post about XML-RPC.'
-post.post_status = "publish"
-post.id = client.call(posts.NewPost(post))
+    post = WordPressPost()
+    post.title = 'Benign Baru'
+    post.content = 'This is a wonderful blog post about XML-RPC.'
+    post.post_status = "publish"
+    post.id = client.call(posts.NewPost(post))
 

