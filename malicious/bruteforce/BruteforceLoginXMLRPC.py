@@ -12,15 +12,6 @@ from wordpress_xmlrpc.exceptions import InvalidCredentialsError
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
-#IMPORT FOLDER OF THE MODULES
-import sys
-sys.path.extend(['/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/benign/register',
-                 '/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/',
-                 '/home/rayyanekaputra/Desktop/skripsi😭/',
-                 '/home/rayyanekaputra/Desktop/skripsi😭/benign/register',
-                 ])
-
-
 #MODULES
 from EmailMaker import NamesPickRandom
 from PasswordMaker import PasswordPickRandom
@@ -63,12 +54,12 @@ while True:
 
     transport = ProxiedTransport()
     transport.set_proxy(proxy_ip, proxy_port, secure=True)
-    client = Client(url = "https://103.185.193.35/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa", transport=transport)
-    # client = Client(url = "https://103.185.193.35/xmlrpc.php", username = NamesPickRandom(),password=PasswordPickRandom(), transport=transport)
+    # client = Client(url = "https://103.185.193.35/xmlrpc.php", username = "resephariankamu",password="LiG5hqDiMNCacSa", transport=transport)
+    client = Client(url = "https://103.185.193.35/xmlrpc.php", username = NamesPickRandom(),password=PasswordPickRandom(), transport=transport)
 
     try:
         post = WordPressPost()
-        post.title = 'test nov 23 DI RUMAH'
+        post.title = 'Nov 27 DI RUMAH'
         post.content = 'ADAKAH RAYYAN DI HAATIMU'
         post.post_status = "publish"
         post.id = client.call(posts.NewPost(post))

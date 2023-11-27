@@ -4,14 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, NoSuchWindowException
 import time
 
-#IMPORT FOLDER OF THE MODULES
-import sys
-sys.path.extend(['/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/benign/register',
-                 '/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/',
-                 '/home/rayyanekaputra/Desktop/skripsi😭/',
-                 '/home/rayyanekaputra/Desktop/skripsi😭/benign/register',
-                 ])
-
 #MODULES
 from EmailMaker import NamesPickRandom
 from PasswordMaker import PasswordPickRandom

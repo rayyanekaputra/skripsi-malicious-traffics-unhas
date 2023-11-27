@@ -1,6 +1,7 @@
 {
     "python.analysis.extraPaths": [
-        "./benign/register"
+        "./benign/register",
+        "./malicious/probing"
     ],
     "python.analysis.autoImportCompletions": false
 }
