@@ -29,7 +29,9 @@ Creating and Publishing a New Post
 def NewPost():
         
     client = Client(
-        url = "https://10.163.10.244/xmlrpc.php",
+        # url = "https://10.163.10.244/xmlrpc.php",
+        url = "https://103.185.193.35/xmlrpc.php",
+        
         username = "resephariankamu",
         password="LiG5hqDiMNCacSa")
 

@@ -7,13 +7,14 @@ from selenium.webdriver.common.by import By
 import time
 
 def AccountMaker():
+    url = "103.185.193.35"
     options = webdriver.ChromeOptions() 
     options.add_argument("--ignore-certificate-errors")
     options.add_argument("--start-maximized")
     driver = webdriver.Chrome(options=options)
 
     # driver.set_window_position(2000, 0)
-    driver.get("https://10.163.10.244/wp-login.php")
+    driver.get(f"https://{url}/wp-login.php")
 
     driver.find_element(By.XPATH, "//*[@id='nav']/a[1]").click()
     driver.find_element(by=By.ID, value="user_login").send_keys(NamesPickRandom())

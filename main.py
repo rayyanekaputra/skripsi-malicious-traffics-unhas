@@ -8,6 +8,11 @@ sys.path.extend(['/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/be
                  '/home/expresidentz/Desktop/skripsi-malicious-traffics-unhas/',
                  '/home/rayyanekaputra/Desktop/skripsi😭/',
                  '/home/rayyanekaputra/Desktop/skripsi😭/benign/register',
+                 '/home/rayyanekaputra/Desktop/skripsi😭/benign/posts',
+                 '/home/rayyanekaputra/Desktop/skripsi😭/malicious/bruteforce',
+                '/home/rayyanekaputra/Desktop/skripsi😭/malicious/probing',
+  
+            
                  ])
 
 
